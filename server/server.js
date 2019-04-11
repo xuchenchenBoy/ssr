@@ -10,15 +10,15 @@ import logs from '../config/log.config.js'
 import config from '../config/webpack.dev.config.js'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
 
 const PORT = 8090;
 const app = express();
-const compiler = webpack(config)
+// const compiler = webpack(config)
 
-logs(app); // 日志
 var router = express.Router();
 app.use(express.static(
-  path.resolve("../clientBuild"), 
+  path.resolve("./clientBuild"), 
   { 
     index: false, // 忽略根目录请求
   }
@@ -32,7 +32,7 @@ router.get("/*", (req, res) => {
     </StaticRouter>
   );
 
-  fs.readFile(path.resolve("../build/index.html"), "utf8", (err, data) => {
+  fs.readFile(path.resolve("./clientBuild/index.html"), "utf8", (err, data) => {
     if (err) {
       console.error(err);
       return res.status(500).send("出错啦");
@@ -59,10 +59,17 @@ const injectHTML = (data, { title, body }) => {
     return data;
 }
 
+logs(app); // 日志
+
 app.use(router);
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath
-}))
+
+// app.use(webpackDevMiddleware(compiler, {
+//   publicPath: config.output.publicPath
+// }))
+
+// app.use(webpackHotMiddleware(compiler, {
+//   publicPath: config.output.publicPath
+// }))
 
 app.listen(PORT, () => {
   console.log(`SSR running on port ${PORT}`);

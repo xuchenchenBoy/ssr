@@ -1,7 +1,9 @@
 const paths = require('./paths')
+const webpack = require('webpack')
+const htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: [paths.appIndexJs],
+  entry: ['webpack-hot-middleware/client', paths.appIndexJs],
   output: {
     path: paths.clientBuild,
     filename: '[name].bundle.js',
@@ -17,7 +19,14 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: [
-            ['@babel/preset-env', { "corejs": "2" }],
+            ['@babel/preset-env', { 
+              useBuiltIns: 'usage', 
+              corejs: "2",  
+              modules: false,
+              targets: {
+                  browsers: ['last 2 versions', 'ie >= 9'],
+              },
+            }],
             '@babel/preset-react'
           ]
         }
@@ -26,5 +35,12 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx']
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new htmlWebpackPlugin({
+      template: './client/index.html',
+      filename: 'index.html'
+    })
+  ]
 }
