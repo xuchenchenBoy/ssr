@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: ['webpack-hot-middleware/client', paths.appIndexJs],
+  entry: ['webpack-hot-middleware/client?reload=true', paths.appIndexJs],
   output: {
     path: paths.clientBuild,
     filename: '[name].bundle.js',
