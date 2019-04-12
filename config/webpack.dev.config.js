@@ -1,9 +1,11 @@
 const paths = require('./paths')
 const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: ['webpack-hot-middleware/client?reload=true', paths.appIndexJs],
+  entry: paths.appIndexJs,
+  // entry: ['webpack-hot-middleware/client?reload=true', paths.appIndexJs],
   output: {
     path: paths.clientBuild,
     filename: '[name].bundle.js',
@@ -37,10 +39,11 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new htmlWebpackPlugin({
       template: './client/index.html',
       filename: 'index.html'
-    })
+    }),
+    new CleanWebpackPlugin()
   ]
 }
