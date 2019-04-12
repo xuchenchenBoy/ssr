@@ -52,7 +52,18 @@ module.exports = {
           },
           { loader: 'less-loader' }
         ]
-      }
+      },
+      {
+        test: /\.(png|jpg|gif|woff|woff2|ttf|eot|svg)$/,
+        use: [
+            {
+                loader: "file-loader",
+                options: {
+                    name: `[name].[ext]`
+                }
+            }
+        ]
+    },
     ]
   },
   resolve: {

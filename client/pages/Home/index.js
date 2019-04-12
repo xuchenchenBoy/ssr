@@ -1,8 +1,14 @@
 import React from "react";
 import Helmet from 'react-helmet'
+import { connect } from 'react-redux'
 import './index.less'
+import * as types from '../../model/home/types'
 
-export default class Home extends React.PureComponent {
+class Home extends React.PureComponent {
+  componentWillMount() {
+    this.props.getInfo()
+  }
+
   render() {
     return (
       <div>
@@ -14,3 +20,15 @@ export default class Home extends React.PureComponent {
     )
   }
 }
+
+export default connect(
+  state => ({ ...state.home }), 
+  (dispatch) => ({
+    getInfo: (payload) => {
+      dispatch({
+        type: types.HOME_INFO_REQ,
+        payload
+      })
+    }
+  })
+)(Home)

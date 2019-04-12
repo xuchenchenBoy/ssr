@@ -2,11 +2,14 @@ import path from "path";
 import fs from "fs";
 import express from "express";
 import React from "react";
+import { createStore } from 'redux'
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
-import Routes from "../client/pages";
 import Helmet from 'react-helmet'
+import { Provider } from 'react-redux'
+import Routes from "../client/pages";
 import logs from '../config/log.config.js'
+import rootReducers from '../client/store/rootReducers'
 // import config from '../config/webpack.dev.config.js'
 // import webpack from 'webpack'
 // import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -26,10 +29,13 @@ app.use(express.static(
 
 router.get("/*", (req, res) => {
   const context = {};
+  const store = createStore(rootReducers)
   const content = (
-    <StaticRouter location={req.url} context={context}>
-      <Routes />
-    </StaticRouter>
+    <Provider store={store}>
+      <StaticRouter location={req.url} context={context}>
+        <Routes />
+      </StaticRouter>
+    </Provider>
   );
 
   fs.readFile(path.resolve("./clientBuild/index.html"), "utf8", (err, data) => {
@@ -40,21 +46,28 @@ router.get("/*", (req, res) => {
     if (context.status === 404) {
       res.status(404);
     }
+    const preloadedState = store.getState()
     const helmet = Helmet.renderStatic(); // 动态配置 header
     return res.send(
       injectHTML(data, {
         title: helmet.title.toString(),
-        body: content
+        body: content,
+        preloadedState,
       })
     );
   });
 });
 
-const injectHTML = (data, { title, body }) => {
+const injectHTML = (data, { title, body, preloadedState }) => {
   data = data.replace(/<title>.*?<\/title>/g, title)
   data = data.replace(
     '<div id="root"></div>',
-    `<div id="root">${renderToString(body)}</div>`
+    `<div id="root">
+      ${renderToString(body)}
+      <script>
+        window.__PRELOADED_STATE__=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+      </script>
+    </div>`
   )
     return data;
 }

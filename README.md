@@ -8,6 +8,9 @@
 ## Structure
 ```
 +-- client                              客户端代码
+|   -- model                            数据管理层
+|   -- pages                            页面
+|   -- store                            store 整合
 +-- server                              服务端代码
 |   -- index.js                         本地服务入口
 |   -- server.js                        服务器文件
