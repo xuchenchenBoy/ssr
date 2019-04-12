@@ -8,9 +8,9 @@ module.exports = {
   // entry: ['webpack-hot-middleware/client?reload=true', paths.appIndexJs],
   output: {
     path: paths.clientBuild,
+    publicPath: paths.publicPath,
     filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.js',
-    publicPath: paths.publicPath
+    chunkFilename: '[name].bundle.js'
   },
   devtool: 'eval-source-map',
   module: {
@@ -41,7 +41,7 @@ module.exports = {
   plugins: [
     // new webpack.HotModuleReplacementPlugin(),
     new htmlWebpackPlugin({
-      template: './client/index.html',
+      template: paths.templateHtml,
       filename: 'index.html'
     }),
     new CleanWebpackPlugin()

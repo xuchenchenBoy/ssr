@@ -11,5 +11,6 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   appIndexJs: resolveApp('client/index.js'),
   publicPath: '/',
-  logPath: resolveApp('logs')
+  logPath: resolveApp('logs'),
+  templateHtml: resolveApp('client/index.html')
 }

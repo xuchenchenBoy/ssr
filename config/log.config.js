@@ -16,7 +16,7 @@ log4js.configure({
     warn_file: { 
       type: 'dateFile',
       filename: `${paths.logPath}/warns/log`,
-      pattern: '_yyyy-MM-dd.log',
+      pattern: 'yyyy-MM-dd.log',
       alwaysIncludePattern: true,
       daysToKeep: 30
     },
@@ -25,7 +25,7 @@ log4js.configure({
       filename:  `${paths.logPath}/errors/log`,
       alwaysIncludePattern: true,
       daysToKeep: 30,
-      pattern: '_yyyy-MM-dd.log'
+      pattern: 'yyyy-MM-dd.log'
     }
   },
   categories: {
