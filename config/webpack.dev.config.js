@@ -2,6 +2,7 @@ const paths = require('./paths')
 const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   entry: paths.appIndexJs,
@@ -36,9 +37,12 @@ module.exports = {
         }
       },
       {
-        test: /\.less$/,
+        test: /\.(le|c)ss$/,
         use: [
-          { loader: 'style-loader' },
+          // { loader: 'style-loader' },
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
           { loader: 'css-loader' },
           { 
             loader: 'postcss-loader',
@@ -60,6 +64,10 @@ module.exports = {
       template: paths.templateHtml,
       filename: 'index.html'
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    })
   ]
 }

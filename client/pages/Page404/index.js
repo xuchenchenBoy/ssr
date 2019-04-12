@@ -1,5 +1,6 @@
 import React from 'react'
 import Helmet from 'react-helmet'
+import './index.less'
 
 export default ({ staticContext = {} }) => {
   staticContext.status = 404;
