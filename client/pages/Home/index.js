@@ -1,5 +1,6 @@
 import React from "react";
 import Helmet from 'react-helmet'
+import './index.less'
 
 export default class Home extends React.PureComponent {
   render() {
@@ -8,7 +9,7 @@ export default class Home extends React.PureComponent {
         <Helmet>
           <title>home</title>
         </Helmet>
-        <div>home</div>
+        <div className="container">home</div>
       </div>
     )
   }
