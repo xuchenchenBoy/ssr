@@ -10,6 +10,7 @@ module.exports = {
   appPath: resolveApp('.'),
   appNodeModules: resolveApp('node_modules'),
   appIndexJs: resolveApp('client/index.js'),
+  serverIndexJs: resolveApp('server/server.js'),
   publicPath: '/',
   logPath: resolveApp('logs'),
   templateHtml: resolveApp('client/index.html')
