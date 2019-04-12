@@ -1,4 +1,4 @@
-# SSR（React版)
+# SSR（React)
 
 ## Start
 `npm run dev:server` (Support hmr. There are still some problems)
