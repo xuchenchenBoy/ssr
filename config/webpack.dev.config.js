@@ -40,7 +40,13 @@ module.exports = {
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' },
-          { loader: 'less-loader' },
+          { 
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [require('autoprefixer')]
+            }
+          },
+          { loader: 'less-loader' }
         ]
       }
     ]
