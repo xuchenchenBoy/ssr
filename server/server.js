@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import express from "express";
 import React from "react";
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
 import Helmet from 'react-helmet'
@@ -14,6 +14,9 @@ import rootReducers from '../client/store/rootReducers'
 // import webpack from 'webpack'
 // import webpackDevMiddleware from 'webpack-dev-middleware'
 // import webpackHotMiddleware from 'webpack-hot-middleware'
+import configureStore from '../client/store'
+import rootSagas from '../client/store/rootSagas'
+
 
 const PORT = 8090;
 const app = express();
@@ -29,7 +32,8 @@ app.use(express.static(
 
 router.get("/*", (req, res) => {
   const context = {};
-  const store = createStore(rootReducers)
+  const store = configureStore(rootReducers, {})
+  store.runSaga(rootSagas)
   const content = (
     <Provider store={store}>
       <StaticRouter location={req.url} context={context}>
@@ -37,7 +41,7 @@ router.get("/*", (req, res) => {
       </StaticRouter>
     </Provider>
   );
-
+  
   fs.readFile(path.resolve("./clientBuild/index.html"), "utf8", (err, data) => {
     if (err) {
       console.error(err);
@@ -48,13 +52,15 @@ router.get("/*", (req, res) => {
     }
     const preloadedState = store.getState()
     const helmet = Helmet.renderStatic(); // 动态配置 header
-    return res.send(
-      injectHTML(data, {
-        title: helmet.title.toString(),
-        body: content,
-        preloadedState,
-      })
-    );
+    const HTML_DOM = injectHTML(data, {
+      title: helmet.title.toString(),
+      body: content,
+      preloadedState,
+    })
+    store.close()
+    res.send(
+      HTML_DOM
+      );
   });
 });
 

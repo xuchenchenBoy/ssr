@@ -1,9 +1,14 @@
-import { createStore } from 'redux'
-import rootReducers from './rootReducers'
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware, { END } from 'redux-saga'
 
-const preloadedState = window.__PRELOADED_STATE__
-delete window.__PRELOADED_STATE__
-const INIT_STATE = preloadedState || {}
-const store = createStore(rootReducers, INIT_STATE)
+const configureStore = (rootReducers, initState) => {
+  const sagaMiddleware = createSagaMiddleware()
+  const store = createStore(rootReducers, initState, applyMiddleware(sagaMiddleware))
+  return {
+    ...store,
+    runSaga: sagaMiddleware.run,
+    close: () => store.dispatch(END)
+  }
+}
 
-export default store;
+export default configureStore;
