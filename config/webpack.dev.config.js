@@ -73,7 +73,8 @@ module.exports = {
     // new webpack.HotModuleReplacementPlugin(),
     new htmlWebpackPlugin({
       template: paths.templateHtml,
-      filename: 'index.html'
+      filename: 'index.html',
+      favicon: paths.favPath
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({

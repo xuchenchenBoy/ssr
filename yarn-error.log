@@ -1,0 +1,90 @@
+Arguments: 
+  D:\Program Files\node\node.exe C:\Users\PC\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add axios
+
+PATH: 
+  C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Program Files\TortoiseSVN\bin;D:\Program Files\node\;d:\Program Files\Git\cmd;D:\dev\apache-ant-1.7.1\bin;D:\dev\jdk1.8.0_101\bin;D:\dev\apache-maven\bin;;C:\WINDOWS\System32\OpenSSH\;C:\Users\PC\AppData\Local\Microsoft\WindowsApps;;D:\Programs\Microsoft VS Code\bin;C:\Users\PC\AppData\Roaming\npm
+
+Yarn version: 
+  1.13.0
+
+Node version: 
+  10.15.3
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, scandir 'E:\assets\ssr-template\node_modules\@types'
+
+npm manifest: 
+  {
+    "name": "ssr-template",
+    "version": "1.0.0",
+    "description": "ssr template",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "dev:client": "webpack --config ./config/webpack.dev.config.js --watch --mode=development",
+      "dev:server": "nodemon ./server/index.js",
+      "dev": "npm-run-all -p dev:**"
+    },
+    "keywords": [
+      "ssr",
+      "react"
+    ],
+    "author": "xuchenchenboy@gmail.com",
+    "license": "ISC",
+    "dependencies": {
+      "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+      "@babel/plugin-transform-async-to-generator": "^7.4.0",
+      "@babel/plugin-transform-modules-commonjs": "^7.4.3",
+      "@babel/plugin-transform-runtime": "^7.4.3",
+      "@babel/polyfill": "^7.4.3",
+      "@babel/runtime": "^7.4.3",
+      "autoprefixer": "^9.5.1",
+      "babel-plugin-dynamic-import-node": "^2.2.0",
+      "clean-webpack-plugin": "^2.0.1",
+      "core-js": "2",
+      "css-loader": "^2.1.1",
+      "express": "^4.16.4",
+      "file-loader": "^3.0.1",
+      "html-webpack-plugin": "^3.2.0",
+      "less": "^3.9.0",
+      "less-loader": "^4.1.0",
+      "log4js": "^4.1.0",
+      "nodemon": "^1.18.11",
+      "postcss-loader": "^3.0.0",
+      "react": "^16.8.6",
+      "react-dom": "^16.8.6",
+      "react-helmet": "^5.2.0",
+      "react-redux": "^7.0.1",
+      "react-router": "^5.0.0",
+      "react-router-config": "^5.0.0",
+      "react-router-dom": "^5.0.0",
+      "redux": "^4.0.1",
+      "redux-saga": "^1.0.2",
+      "style-loader": "^0.23.1",
+      "webpack-dev-middleware": "^3.6.2",
+      "webpack-hot-middleware": "^2.24.3",
+      "webpack-node-externals": "^1.7.2"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.4.3",
+      "@babel/preset-env": "^7.4.3",
+      "@babel/preset-react": "^7.0.0",
+      "@babel/register": "^7.4.0",
+      "babel-loader": "^8.0.5",
+      "babel-plugin-add-module-exports": "^1.0.0",
+      "ignore-styles": "^5.0.1",
+      "mini-css-extract-plugin": "^0.6.0",
+      "npm-run-all": "^4.1.5",
+      "webpack": "^4.29.6",
+      "webpack-cli": "^3.3.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

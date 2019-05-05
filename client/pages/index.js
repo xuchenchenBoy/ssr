@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import Home from "./Home";
-import Page404 from './Page404'
+import routes from './routes.config'
+import { renderRoutes } from 'react-router-config';
 
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/home" component={Home} />
-      <Route component={Page404} />
+      {
+        renderRoutes(routes)
+      }
     </Switch>
   );
 };

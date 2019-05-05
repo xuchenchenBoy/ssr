@@ -3,6 +3,7 @@ const path = require('path')
 
 const appDirectory = fs.realpathSync(process.cwd()) // 获取真实路径
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
+const staticPath = resolveApp('client/static')
 
 module.exports = {
   clientBuild: resolveApp('clientBuild'),
@@ -13,5 +14,7 @@ module.exports = {
   serverIndexJs: resolveApp('server/server.js'),
   publicPath: '/',
   logPath: resolveApp('logs'),
-  templateHtml: resolveApp('client/index.html')
+  templateHtml: resolveApp('client/index.html'),
+  staticPath: staticPath,
+  favPath: path.resolve(staticPath, 'favicon.ico')
 }
