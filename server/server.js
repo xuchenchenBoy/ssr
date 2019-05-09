@@ -85,7 +85,7 @@ const injectHTML = (data, { title, body, preloadedState }) => {
       </script>
     </div>`
   )
-    return data;
+  return data;
 }
 
 logs(app); // 日志
